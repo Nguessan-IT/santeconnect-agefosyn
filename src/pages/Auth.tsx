@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Heart, Mail, Lock, User, Phone, ArrowLeft } from "lucide-react";
+import { Heart, Mail, Lock, User, Phone, ArrowLeft, Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,6 +10,14 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+
+const passwordCriteria = [
+  { label: "Minuscule (a-z)", test: (p: string) => /[a-z]/.test(p) },
+  { label: "Majuscule (A-Z)", test: (p: string) => /[A-Z]/.test(p) },
+  { label: "Chiffre (0-9)", test: (p: string) => /[0-9]/.test(p) },
+  { label: "Caractère spécial (!@#$...)", test: (p: string) => /[^a-zA-Z0-9]/.test(p) },
+  { label: "8 caractères minimum", test: (p: string) => p.length >= 8 },
+];
 
 export default function Auth() {
   const navigate = useNavigate();
@@ -20,7 +28,18 @@ export default function Auth() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPhone, setRegisterPhone] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
+  const [registerConfirmPassword, setRegisterConfirmPassword] = useState("");
   const [registerRole, setRegisterRole] = useState("patient");
+
+  const passwordsMatch = useMemo(
+    () => registerConfirmPassword.length > 0 && registerPassword === registerConfirmPassword,
+    [registerPassword, registerConfirmPassword]
+  );
+
+  const allCriteriaMet = useMemo(
+    () => passwordCriteria.every((c) => c.test(registerPassword)),
+    [registerPassword]
+  );
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,7 +51,6 @@ export default function Auth() {
       });
       if (error) throw error;
       toast.success("Connexion réussie !");
-      // Redirect based on role - for now default to patient
       navigate("/patient");
     } catch (error: any) {
       toast.error(error.message || "Erreur de connexion");
@@ -43,6 +61,14 @@ export default function Auth() {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!allCriteriaMet) {
+      toast.error("Le mot de passe ne respecte pas tous les critères.");
+      return;
+    }
+    if (!passwordsMatch) {
+      toast.error("Les mots de passe ne correspondent pas.");
+      return;
+    }
     setLoading(true);
     try {
       const { error } = await supabase.auth.signUp({
@@ -146,14 +172,50 @@ export default function Auth() {
                       </SelectContent>
                     </Select>
                   </div>
+                  {/* Mot de passe */}
                   <div className="space-y-2">
                     <Label>Mot de passe</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                       <Input type="password" placeholder="••••••••" className="pl-10" value={registerPassword} onChange={(e) => setRegisterPassword(e.target.value)} required />
                     </div>
+                    {registerPassword.length > 0 && (
+                      <div className="mt-2 space-y-1 text-xs">
+                        {passwordCriteria.map((c) => {
+                          const met = c.test(registerPassword);
+                          return (
+                            <div key={c.label} className="flex items-center gap-2">
+                              {met ? (
+                                <Check className="h-3.5 w-3.5 text-accent" />
+                              ) : (
+                                <X className="h-3.5 w-3.5 text-destructive" />
+                              )}
+                              <span className={met ? "text-accent" : "text-muted-foreground"}>{c.label}</span>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
-                  <Button type="submit" className="w-full" disabled={loading}>
+                  {/* Confirmation mot de passe */}
+                  <div className="space-y-2">
+                    <Label>Confirmer le mot de passe</Label>
+                    <div className="relative">
+                      <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                      <Input type="password" placeholder="••••••••" className="pl-10" value={registerConfirmPassword} onChange={(e) => setRegisterConfirmPassword(e.target.value)} required />
+                    </div>
+                    {registerConfirmPassword.length > 0 && (
+                      <div className="flex items-center gap-2 mt-1">
+                        <div className={`h-4 w-4 rounded-full flex items-center justify-center ${passwordsMatch ? "bg-accent" : "bg-destructive/20"}`}>
+                          {passwordsMatch && <Check className="h-3 w-3 text-accent-foreground" />}
+                        </div>
+                        <span className={`text-xs ${passwordsMatch ? "text-accent" : "text-destructive"}`}>
+                          {passwordsMatch ? "Les mots de passe correspondent" : "Les mots de passe ne correspondent pas"}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <Button type="submit" className="w-full" disabled={loading || !allCriteriaMet || !passwordsMatch}>
                     {loading ? "Création..." : "Créer un compte"}
                   </Button>
                 </form>
