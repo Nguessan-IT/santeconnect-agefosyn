@@ -79,11 +79,21 @@ export default function Auth() {
             full_name: registerName,
             phone: registerPhone,
             role: registerRole,
+            app_context: "santeconnect",
           },
         },
       });
       if (error) throw error;
-      toast.success("Compte créé ! Vérifiez votre email.");
+
+      // Envoyer l'email de confirmation via Resend
+      const { error: emailError } = await supabase.functions.invoke("send-confirmation-email", {
+        body: { email: registerEmail, name: registerName },
+      });
+      if (emailError) {
+        console.error("Erreur envoi email:", emailError);
+      }
+
+      toast.success("Compte créé ! Un email de confirmation vous a été envoyé.");
     } catch (error: any) {
       toast.error(error.message || "Erreur lors de l'inscription");
     } finally {
