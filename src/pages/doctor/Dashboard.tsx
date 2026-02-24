@@ -38,10 +38,12 @@ export default function DoctorDashboard() {
       <main className="container mx-auto px-4 py-8">
         <motion.div variants={container} initial="hidden" animate="show" className="grid grid-cols-3 gap-4 mb-8">
           {stats.map((s) => (
-            <motion.div key={s.label} variants={item}>
-              <Card>
+            <motion.div key={s.label} variants={item} whileHover={{ y: -4, scale: 1.03 }}>
+              <Card className="hover-glow shine-effect group">
                 <CardContent className="p-4 text-center">
-                  <s.icon className={`h-8 w-8 mx-auto mb-2 ${s.color}`} />
+                  <motion.div whileHover={{ rotate: 10 }} transition={{ type: "spring", stiffness: 300 }}>
+                    <s.icon className={`h-8 w-8 mx-auto mb-2 ${s.color} group-hover:scale-110 transition-transform`} />
+                  </motion.div>
                   <p className="text-2xl font-bold">{s.value}</p>
                   <p className="text-xs text-muted-foreground">{s.label}</p>
                 </CardContent>
@@ -50,23 +52,30 @@ export default function DoctorDashboard() {
           ))}
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 gap-4">
+        <motion.div variants={container} initial="hidden" animate="show" className="grid sm:grid-cols-2 gap-4">
           {menuItems.map((m) => (
-            <Link key={m.title} to={m.link}>
-              <Card className="hover-lift cursor-pointer h-full">
-                <CardContent className="p-6 flex items-start gap-4">
-                  <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
-                    <m.icon className="h-6 w-6 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold">{m.title}</h3>
-                    <p className="text-sm text-muted-foreground">{m.desc}</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
+            <motion.div key={m.title} variants={item}>
+              <Link to={m.link}>
+                <motion.div whileHover={{ y: -6, scale: 1.02 }} whileTap={{ scale: 0.97 }}>
+                  <Card className="hover-card cursor-pointer h-full group">
+                    <CardContent className="p-6 flex items-start gap-4">
+                      <motion.div
+                        whileHover={{ rotate: 10 }}
+                        className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors"
+                      >
+                        <m.icon className="h-6 w-6 text-primary" />
+                      </motion.div>
+                      <div>
+                        <h3 className="font-semibold group-hover:text-primary transition-colors">{m.title}</h3>
+                        <p className="text-sm text-muted-foreground">{m.desc}</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </main>
     </div>
   );

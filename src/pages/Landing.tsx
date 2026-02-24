@@ -31,22 +31,22 @@ export default function Landing() {
       {/* Header */}
       <header className="sticky top-0 z-50 glass-effect">
         <div className="container mx-auto flex items-center justify-between py-4 px-4">
-          <div className="flex items-center gap-2">
-            <div className="h-10 w-10 rounded-xl gradient-primary flex items-center justify-center">
+          <motion.div whileHover={{ scale: 1.05 }} className="flex items-center gap-2">
+            <div className="h-10 w-10 rounded-xl gradient-primary flex items-center justify-center icon-float">
               <Heart className="h-5 w-5 text-primary-foreground" />
             </div>
             <span className="text-xl font-bold gradient-text">SantéConnect</span>
-          </div>
+          </motion.div>
           <nav className="hidden md:flex items-center gap-6 text-sm text-muted-foreground">
-            <a href="#features" className="hover:text-foreground transition-colors">Fonctionnalités</a>
-            <a href="#about" className="hover:text-foreground transition-colors">À propos</a>
+            <a href="#features" className="link-underline hover:text-foreground transition-colors py-1">Fonctionnalités</a>
+            <a href="#about" className="link-underline hover:text-foreground transition-colors py-1">À propos</a>
           </nav>
           <div className="flex items-center gap-3">
             <Link to="/auth">
-              <Button variant="ghost">Connexion</Button>
+              <Button variant="ghost" className="hover-scale">Connexion</Button>
             </Link>
             <Link to="/auth">
-              <Button>Commencer</Button>
+              <Button className="hover-glow">Commencer</Button>
             </Link>
           </div>
         </div>
@@ -70,12 +70,16 @@ export default function Landing() {
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link to="/auth">
-                  <Button size="lg" className="gap-2">
-                    Créer un compte <ArrowRight className="h-4 w-4" />
-                  </Button>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button size="lg" className="gap-2 hover-glow shadow-lg shadow-primary/25">
+                      Créer un compte <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </motion.div>
                 </Link>
                 <Link to="/auth">
-                  <Button size="lg" variant="outline">Se connecter</Button>
+                  <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                    <Button size="lg" variant="outline" className="hover-lift">Se connecter</Button>
+                  </motion.div>
                 </Link>
               </div>
             </motion.div>
@@ -106,12 +110,16 @@ export default function Landing() {
           <motion.div variants={container} initial="hidden" whileInView="show" viewport={{ once: true }} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((f) => (
               <motion.div key={f.title} variants={item}>
-                <Card className="hover-lift h-full border-border/50">
+                <Card className="hover-card shine-effect h-full border-border/50 group cursor-pointer">
                   <CardContent className="p-6">
-                    <div className="h-12 w-12 rounded-xl gradient-primary flex items-center justify-center mb-4">
+                    <motion.div
+                      whileHover={{ rotate: 10, scale: 1.1 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                      className="h-12 w-12 rounded-xl gradient-primary flex items-center justify-center mb-4 shadow-lg shadow-primary/20"
+                    >
                       <f.icon className="h-6 w-6 text-primary-foreground" />
-                    </div>
-                    <h3 className="font-semibold text-lg mb-2">{f.title}</h3>
+                    </motion.div>
+                    <h3 className="font-semibold text-lg mb-2 group-hover:text-primary transition-colors">{f.title}</h3>
                     <p className="text-sm text-muted-foreground">{f.desc}</p>
                   </CardContent>
                 </Card>
@@ -124,17 +132,26 @@ export default function Landing() {
       {/* CTA */}
       <section className="py-20">
         <div className="container mx-auto px-4">
-          <Card className="gradient-primary p-12 text-center border-0">
-            <h2 className="text-3xl font-bold text-primary-foreground mb-4">Prêt à digitaliser votre santé ?</h2>
-            <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
-              Rejoignez SantéConnect et accédez à vos soins en toute simplicité.
-            </p>
-            <Link to="/auth">
-              <Button size="lg" variant="secondary" className="gap-2">
-                Commencer maintenant <ArrowRight className="h-4 w-4" />
-              </Button>
-            </Link>
-          </Card>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <Card className="gradient-primary p-12 text-center border-0 shine-effect">
+              <h2 className="text-3xl font-bold text-primary-foreground mb-4">Prêt à digitaliser votre santé ?</h2>
+              <p className="text-primary-foreground/80 mb-8 max-w-xl mx-auto">
+                Rejoignez SantéConnect et accédez à vos soins en toute simplicité.
+              </p>
+              <Link to="/auth">
+                <motion.div whileHover={{ scale: 1.08 }} whileTap={{ scale: 0.95 }} className="inline-block">
+                  <Button size="lg" variant="secondary" className="gap-2 hover-glow shadow-xl">
+                    Commencer maintenant <ArrowRight className="h-4 w-4" />
+                  </Button>
+                </motion.div>
+              </Link>
+            </Card>
+          </motion.div>
         </div>
       </section>
 
