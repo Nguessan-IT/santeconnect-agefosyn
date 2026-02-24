@@ -107,18 +107,18 @@ export default function Auth() {
       <AnimatedBackground />
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full max-w-md relative z-10">
         <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-4">
-            <ArrowLeft className="h-4 w-4" /> Retour à l'accueil
+          <Link to="/" className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground mb-4 group transition-colors">
+            <ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" /> Retour à l'accueil
           </Link>
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <div className="h-10 w-10 rounded-xl gradient-primary flex items-center justify-center">
+          <motion.div whileHover={{ scale: 1.05 }} className="flex items-center justify-center gap-2 mb-2">
+            <div className="h-10 w-10 rounded-xl gradient-primary flex items-center justify-center icon-float">
               <Heart className="h-5 w-5 text-primary-foreground" />
             </div>
             <span className="text-xl font-bold gradient-text">SantéConnect</span>
-          </div>
+          </motion.div>
         </div>
 
-        <Card className="glass-effect">
+        <Card className="glass-effect hover-glow">
           <CardHeader className="text-center">
             <CardTitle>Bienvenue</CardTitle>
             <CardDescription>Connectez-vous ou créez un compte</CardDescription>
