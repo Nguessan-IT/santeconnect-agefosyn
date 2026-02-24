@@ -3,10 +3,12 @@ import { ArrowLeft, Users, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 export default function DoctorPatients() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <AnimatedBackground />
       <header className="glass-effect sticky top-0 z-50">
         <div className="container mx-auto flex items-center gap-4 py-3 px-4">
           <Link to="/doctor"><Button variant="ghost" size="icon"><ArrowLeft className="h-5 w-5" /></Button></Link>

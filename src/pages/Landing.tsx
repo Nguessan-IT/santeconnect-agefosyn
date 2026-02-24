@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Heart, Calendar, Video, MessageSquare, Shield, Users, ArrowRight, Activity, Stethoscope, Pill } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import { Card, CardContent } from "@/components/ui/card";
 
 const features = [
@@ -25,7 +26,8 @@ const item = {
 
 export default function Landing() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <AnimatedBackground />
       {/* Header */}
       <header className="sticky top-0 z-50 glass-effect">
         <div className="container mx-auto flex items-center justify-between py-4 px-4">
