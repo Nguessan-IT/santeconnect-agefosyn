@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Building2, BarChart3, FileText, Users, Settings, Bell, LogOut, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 const stats = [
   { label: "Centres actifs", value: "3", icon: Building2 },
@@ -21,7 +22,8 @@ const item = { hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0 } };
 
 export default function AdminDashboard() {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background relative">
+      <AnimatedBackground />
       <header className="glass-effect sticky top-0 z-50">
         <div className="container mx-auto flex items-center justify-between py-3 px-4">
           <div className="flex items-center gap-2">

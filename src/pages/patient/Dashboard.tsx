@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, FileText, MessageSquare, Video, Pill, Bell, LogOut, User, Heart, Activity, ChevronRight, Shield } from "lucide-react";
+import AnimatedBackground from "@/components/AnimatedBackground";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -24,12 +25,7 @@ const item = { hidden: { opacity: 0, y: 30, scale: 0.95 }, show: { opacity: 1, y
 export default function PatientDashboard() {
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
-      {/* Animated background blobs */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-96 h-96 rounded-full bg-primary/5 blur-3xl animate-float" />
-        <div className="absolute top-1/2 -left-40 w-80 h-80 rounded-full bg-accent/5 blur-3xl animate-float" style={{ animationDelay: "1.5s" }} />
-        <div className="absolute -bottom-20 right-1/4 w-64 h-64 rounded-full bg-primary/3 blur-3xl animate-float" style={{ animationDelay: "3s" }} />
-      </div>
+      <AnimatedBackground />
 
       {/* Header */}
       <header className="glass-effect sticky top-0 z-50 border-b border-border/30">
