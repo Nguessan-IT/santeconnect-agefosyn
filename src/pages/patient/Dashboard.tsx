@@ -125,20 +125,19 @@ export default function PatientDashboard() {
                   whileTap={{ scale: 0.97 }}
                   className="group relative rounded-2xl overflow-hidden cursor-pointer h-full"
                 >
-                  <div className={`absolute inset-0 bg-gradient-to-br ${m.gradient} opacity-90`} />
-                  <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZG90cyIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48Y2lyY2xlIGN4PSIxMCIgY3k9IjEwIiByPSIxLjUiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wOCkiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSJ1cmwoI2RvdHMpIi8+PC9zdmc+')] opacity-60" />
+                  <div className="absolute inset-0 bg-primary/5 rounded-2xl" />
                   <div className="relative p-5 flex flex-col gap-3">
                     <motion.div
-                      className="h-12 w-12 rounded-xl bg-white/20 backdrop-blur-sm flex items-center justify-center border border-white/30 shadow-md group-hover:shadow-lg transition-shadow"
+                      className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center border border-primary/20 shadow-md group-hover:shadow-lg transition-shadow"
                       whileHover={{ rotate: 10 }}
                     >
-                      <m.icon className="h-6 w-6 text-white" />
+                      <m.icon className="h-6 w-6 text-primary" />
                     </motion.div>
                     <div>
-                      <h3 className="font-bold text-white text-sm">{m.title}</h3>
-                      <p className="text-[12px] text-white/70 leading-tight mt-0.5">{m.desc}</p>
+                      <h3 className="font-bold text-primary text-sm">{m.title}</h3>
+                      <p className="text-[12px] text-muted-foreground leading-tight mt-0.5">{m.desc}</p>
                     </div>
-                    <ChevronRight className="h-4 w-4 text-white/50 absolute top-5 right-4 group-hover:translate-x-1 transition-transform" />
+                    <ChevronRight className="h-4 w-4 text-primary/40 absolute top-5 right-4 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </motion.div>
               </Link>
