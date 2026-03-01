@@ -118,6 +118,19 @@ export default function Auth() {
           </motion.div>
         </div>
 
+        {/* DEV MODE: Accès rapide aux dashboards */}
+        <Card className="glass-effect hover-glow mb-4 border-dashed border-2 border-yellow-500/50">
+          <CardHeader className="text-center pb-2">
+            <CardTitle className="text-sm text-yellow-600">🚧 Mode Développement</CardTitle>
+            <CardDescription className="text-xs">Accès direct sans authentification</CardDescription>
+          </CardHeader>
+          <CardContent className="grid grid-cols-3 gap-2">
+            <Button variant="outline" size="sm" onClick={() => navigate("/patient")} className="text-xs">Patient</Button>
+            <Button variant="outline" size="sm" onClick={() => navigate("/doctor")} className="text-xs">Médecin</Button>
+            <Button variant="outline" size="sm" onClick={() => navigate("/admin")} className="text-xs">Admin</Button>
+          </CardContent>
+        </Card>
+
         <Card className="glass-effect hover-glow">
           <CardHeader className="text-center">
             <CardTitle>Bienvenue</CardTitle>
