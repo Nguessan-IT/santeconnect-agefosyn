@@ -37,6 +37,7 @@ const item = {
 function AnimatedCounter({ value }: { value: number }) {
   const [count, setCount] = useState(0);
   useEffect(() => {
+    if (value === 0) { setCount(0); return; }
     let start = 0;
     const step = Math.max(1, Math.floor(800 / value));
     const timer = setInterval(() => { start += 1; setCount(start); if (start >= value) clearInterval(timer); }, step);
