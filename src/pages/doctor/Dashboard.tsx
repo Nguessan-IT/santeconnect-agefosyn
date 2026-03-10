@@ -19,12 +19,7 @@ const menuItems = [
   { icon: FileText, title: "Ordonnances", desc: "Créer et gérer les prescriptions", link: "/doctor/prescriptions" },
 ];
 
-const recentPatients = [
-  { name: "Aminata K.", time: "09:30", status: "En cours", urgency: false },
-  { name: "Kouassi B.", time: "10:15", status: "En attente", urgency: true },
-  { name: "Fatou D.", time: "11:00", status: "Planifié", urgency: false },
-  { name: "Ibrahim M.", time: "14:00", status: "Planifié", urgency: false },
-];
+const recentPatients: { name: string; time: string; status: string; urgency: boolean }[] = [];
 
 const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.15 } } };
 const item = {

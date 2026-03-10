@@ -15,9 +15,9 @@ const stats = [
 ];
 
 const menuItems = [
-  { icon: Building2, title: "Centres médicaux", desc: "Gérer les établissements", link: "/admin/hospitals", badge: "3 actifs" },
+  { icon: Building2, title: "Centres médicaux", desc: "Gérer les établissements", link: "/admin/hospitals", badge: "0 actif" },
   { icon: BarChart3, title: "Analytique", desc: "Statistiques et KPIs", link: "/admin/analytics", badge: "Live" },
-  { icon: FileText, title: "Rapports", desc: "Rapports et audits", link: "/admin/reports", badge: "2 nouveaux" },
+  { icon: FileText, title: "Rapports", desc: "Rapports et audits", link: "/admin/reports", badge: "0 nouveau" },
 ];
 
 const recentActivity: { action: string; time: string; type: string }[] = [];
