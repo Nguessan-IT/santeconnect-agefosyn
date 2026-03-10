@@ -20,12 +20,7 @@ const menuItems = [
   { icon: FileText, title: "Rapports", desc: "Rapports et audits", link: "/admin/reports", badge: "2 nouveaux" },
 ];
 
-const recentActivity = [
-  { action: "Nouveau médecin inscrit", time: "Il y a 5 min", type: "user" },
-  { action: "Rapport mensuel généré", time: "Il y a 1h", type: "report" },
-  { action: "Centre Abidjan Nord activé", time: "Il y a 3h", type: "center" },
-  { action: "Mise à jour sécurité", time: "Il y a 6h", type: "system" },
-];
+const recentActivity: { action: string; time: string; type: string }[] = [];
 
 const systemMetrics = [
   { label: "API", value: "45ms", icon: Zap },
