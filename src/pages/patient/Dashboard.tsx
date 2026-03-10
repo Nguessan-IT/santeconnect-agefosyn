@@ -16,9 +16,9 @@ const menuItems = [
 ];
 
 const stats = [
-  { label: "Consultations", value: 12, icon: Activity },
-  { label: "Ordonnances", value: 5, icon: FileText },
-  { label: "Non lus", value: 3, icon: MessageSquare },
+  { label: "Consultations", value: 0, icon: Activity },
+  { label: "Ordonnances", value: 0, icon: FileText },
+  { label: "Non lus", value: 0, icon: MessageSquare },
 ];
 
 const healthTips = [

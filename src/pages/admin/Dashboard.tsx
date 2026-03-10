@@ -8,10 +8,10 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import { useState, useEffect } from "react";
 
 const stats = [
-  { label: "Centres", value: 3, icon: Building2, trend: "+1", color: "text-primary" },
-  { label: "Utilisateurs", value: 156, icon: Users, trend: "+23%", color: "text-accent" },
-  { label: "RDV/mois", value: 423, icon: BarChart3, trend: "+18%", color: "text-primary" },
-  { label: "Uptime", value: 99, icon: Server, trend: "stable", color: "text-accent", suffix: "%" },
+  { label: "Centres", value: 0, icon: Building2, trend: "--", color: "text-primary" },
+  { label: "Utilisateurs", value: 0, icon: Users, trend: "--", color: "text-accent" },
+  { label: "RDV/mois", value: 0, icon: BarChart3, trend: "--", color: "text-primary" },
+  { label: "Uptime", value: 0, icon: Server, trend: "--", color: "text-accent", suffix: "%" },
 ];
 
 const menuItems = [

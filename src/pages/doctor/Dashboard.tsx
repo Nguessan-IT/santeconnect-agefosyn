@@ -8,10 +8,10 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import { useState, useEffect } from "react";
 
 const stats = [
-  { label: "Patients", value: 12, icon: Users, trend: "+3" },
-  { label: "RDV", value: 5, icon: Calendar, trend: "2 urgents" },
-  { label: "Consultations", value: 8, icon: Video, trend: "+12%" },
-  { label: "Prescriptions", value: 15, icon: FileText, trend: "ce mois" },
+  { label: "Patients", value: 0, icon: Users, trend: "--" },
+  { label: "RDV", value: 0, icon: Calendar, trend: "--" },
+  { label: "Consultations", value: 0, icon: Video, trend: "--" },
+  { label: "Prescriptions", value: 0, icon: FileText, trend: "--" },
 ];
 
 const menuItems = [
