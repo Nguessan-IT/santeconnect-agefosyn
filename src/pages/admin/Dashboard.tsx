@@ -8,24 +8,19 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import { useState, useEffect } from "react";
 
 const stats = [
-  { label: "Centres", value: 3, icon: Building2, trend: "+1", color: "text-primary" },
-  { label: "Utilisateurs", value: 156, icon: Users, trend: "+23%", color: "text-accent" },
-  { label: "RDV/mois", value: 423, icon: BarChart3, trend: "+18%", color: "text-primary" },
-  { label: "Uptime", value: 99, icon: Server, trend: "stable", color: "text-accent", suffix: "%" },
+  { label: "Centres", value: 0, icon: Building2, trend: "--", color: "text-primary" },
+  { label: "Utilisateurs", value: 0, icon: Users, trend: "--", color: "text-accent" },
+  { label: "RDV/mois", value: 0, icon: BarChart3, trend: "--", color: "text-primary" },
+  { label: "Uptime", value: 0, icon: Server, trend: "--", color: "text-accent", suffix: "%" },
 ];
 
 const menuItems = [
-  { icon: Building2, title: "Centres médicaux", desc: "Gérer les établissements", link: "/admin/hospitals", badge: "3 actifs" },
+  { icon: Building2, title: "Centres médicaux", desc: "Gérer les établissements", link: "/admin/hospitals", badge: "0 actif" },
   { icon: BarChart3, title: "Analytique", desc: "Statistiques et KPIs", link: "/admin/analytics", badge: "Live" },
-  { icon: FileText, title: "Rapports", desc: "Rapports et audits", link: "/admin/reports", badge: "2 nouveaux" },
+  { icon: FileText, title: "Rapports", desc: "Rapports et audits", link: "/admin/reports", badge: "0 nouveau" },
 ];
 
-const recentActivity = [
-  { action: "Nouveau médecin inscrit", time: "Il y a 5 min", type: "user" },
-  { action: "Rapport mensuel généré", time: "Il y a 1h", type: "report" },
-  { action: "Centre Abidjan Nord activé", time: "Il y a 3h", type: "center" },
-  { action: "Mise à jour sécurité", time: "Il y a 6h", type: "system" },
-];
+const recentActivity: { action: string; time: string; type: string }[] = [];
 
 const systemMetrics = [
   { label: "API", value: "45ms", icon: Zap },
@@ -43,6 +38,7 @@ const item = {
 function AnimatedCounter({ value, suffix = "" }: { value: number; suffix?: string }) {
   const [count, setCount] = useState(0);
   useEffect(() => {
+    if (value === 0) { setCount(0); return; }
     let start = 0;
     const step = Math.max(1, Math.floor(800 / value));
     const timer = setInterval(() => { start += 1; setCount(start); if (start >= value) clearInterval(timer); }, step);

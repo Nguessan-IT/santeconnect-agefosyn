@@ -16,9 +16,9 @@ const menuItems = [
 ];
 
 const stats = [
-  { label: "Consultations", value: 12, icon: Activity },
-  { label: "Ordonnances", value: 5, icon: FileText },
-  { label: "Non lus", value: 3, icon: MessageSquare },
+  { label: "Consultations", value: 0, icon: Activity },
+  { label: "Ordonnances", value: 0, icon: FileText },
+  { label: "Non lus", value: 0, icon: MessageSquare },
 ];
 
 const healthTips = [
@@ -37,6 +37,7 @@ const item = {
 function AnimatedCounter({ value }: { value: number }) {
   const [count, setCount] = useState(0);
   useEffect(() => {
+    if (value === 0) { setCount(0); return; }
     let start = 0;
     const step = Math.max(1, Math.floor(800 / value));
     const timer = setInterval(() => { start += 1; setCount(start); if (start >= value) clearInterval(timer); }, step);

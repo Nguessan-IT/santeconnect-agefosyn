@@ -8,10 +8,10 @@ import MobileBottomNav from "@/components/MobileBottomNav";
 import { useState, useEffect } from "react";
 
 const stats = [
-  { label: "Patients", value: 12, icon: Users, trend: "+3" },
-  { label: "RDV", value: 5, icon: Calendar, trend: "2 urgents" },
-  { label: "Consultations", value: 8, icon: Video, trend: "+12%" },
-  { label: "Prescriptions", value: 15, icon: FileText, trend: "ce mois" },
+  { label: "Patients", value: 0, icon: Users, trend: "--" },
+  { label: "RDV", value: 0, icon: Calendar, trend: "--" },
+  { label: "Consultations", value: 0, icon: Video, trend: "--" },
+  { label: "Prescriptions", value: 0, icon: FileText, trend: "--" },
 ];
 
 const menuItems = [
@@ -19,12 +19,7 @@ const menuItems = [
   { icon: FileText, title: "Ordonnances", desc: "Créer et gérer les prescriptions", link: "/doctor/prescriptions" },
 ];
 
-const recentPatients = [
-  { name: "Aminata K.", time: "09:30", status: "En cours", urgency: false },
-  { name: "Kouassi B.", time: "10:15", status: "En attente", urgency: true },
-  { name: "Fatou D.", time: "11:00", status: "Planifié", urgency: false },
-  { name: "Ibrahim M.", time: "14:00", status: "Planifié", urgency: false },
-];
+const recentPatients: { name: string; time: string; status: string; urgency: boolean }[] = [];
 
 const container = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.15 } } };
 const item = {
@@ -35,6 +30,7 @@ const item = {
 function AnimatedCounter({ value }: { value: number }) {
   const [count, setCount] = useState(0);
   useEffect(() => {
+    if (value === 0) { setCount(0); return; }
     let start = 0;
     const step = Math.max(1, Math.floor(800 / value));
     const timer = setInterval(() => { start += 1; setCount(start); if (start >= value) clearInterval(timer); }, step);
