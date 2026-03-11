@@ -17,7 +17,7 @@ interface Prescription {
   document_url: string | null;
   statut: string | null;
   created_at: string;
-  medecin: { nom: string; prenom: string } | null;
+  medecin: { nom: string | null; prenom: string | null } | null;
 }
 
 export default function PatientPharmacy() {
@@ -93,7 +93,7 @@ export default function PatientPharmacy() {
   function generatePrescriptionText(p: Prescription) {
     let text = `=== ORDONNANCE ===\n`;
     text += `Date: ${new Date(p.created_at).toLocaleDateString("fr-FR")}\n`;
-    if (p.medecin) text += `Médecin: Dr. ${p.medecin.prenom} ${p.medecin.nom}\n`;
+    if (p.medecin) text += `Médecin: Dr. ${p.medecin.prenom || ""} ${p.medecin.nom || ""}\n`;
     text += `Statut: ${getStatusLabel(p.statut)}\n\n`;
     text += `--- Médicaments ---\n`;
     p.medicaments.forEach((m, i) => {
@@ -180,7 +180,7 @@ export default function PatientPharmacy() {
                           {p.medicaments.map(m => m.nom).join(", ") || "Ordonnance"}
                         </h3>
                         {p.medecin && (
-                          <p className="text-xs text-muted-foreground">Dr. {p.medecin.prenom} {p.medecin.nom}</p>
+                          <p className="text-xs text-muted-foreground">Dr. {p.medecin.prenom || ""} {p.medecin.nom || ""}</p>
                         )}
                         <div className="flex items-center gap-2 mt-1 flex-wrap">
                           <span className="text-[10px] text-muted-foreground flex items-center gap-1">
