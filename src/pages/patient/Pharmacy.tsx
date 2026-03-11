@@ -93,7 +93,7 @@ export default function PatientPharmacy() {
   function generatePrescriptionText(p: Prescription) {
     let text = `=== ORDONNANCE ===\n`;
     text += `Date: ${new Date(p.created_at).toLocaleDateString("fr-FR")}\n`;
-    if (p.medecin) text += `Médecin: Dr. ${p.medecin.prenom} ${p.medecin.nom}\n`;
+    if (p.medecin) text += `Médecin: Dr. ${p.medecin.prenom || ""} ${p.medecin.nom || ""}\n`;
     text += `Statut: ${getStatusLabel(p.statut)}\n\n`;
     text += `--- Médicaments ---\n`;
     p.medicaments.forEach((m, i) => {
