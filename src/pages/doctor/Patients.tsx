@@ -122,6 +122,7 @@ export default function DoctorPatients() {
           </div>
         )}
       </main>
+      <MobileBottomNav role="doctor" />
     </div>
   );
 }

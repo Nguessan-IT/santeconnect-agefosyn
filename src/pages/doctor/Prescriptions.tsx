@@ -404,6 +404,7 @@ export default function DoctorPrescriptions() {
           </div>
         </DialogContent>
       </Dialog>
+      <MobileBottomNav role="doctor" />
     </div>
   );
 }
