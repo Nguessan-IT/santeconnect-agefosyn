@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 export default function PatientMedicalRecord() {
   return (
