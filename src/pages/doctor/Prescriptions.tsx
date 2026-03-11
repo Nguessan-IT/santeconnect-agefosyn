@@ -84,13 +84,13 @@ export default function DoctorPrescriptions() {
         .from("patients_santeconnect")
         .select("id, user_id");
 
-      const userIds = (patientsRaw || []).map(p => p.user_id).filter(Boolean);
+      const userIds = (patientsRaw || []).map(p => p.user_id).filter(Boolean) as string[];
       const { data: profiles } = await supabase
         .from("profiles_santeconnect")
-        .select("id, nom, prenom, user_id")
-        .in("user_id", userIds);
+        .select("id, nom, prenom")
+        .in("id", userIds);
 
-      const profileByUserId = new Map((profiles || []).map(p => [p.user_id, p]));
+      const profileById = new Map((profiles || []).map(p => [p.id, p]));
       const patientDisplayList: PatientDisplay[] = (patientsRaw || []).map(p => {
         const prof = profileByUserId.get(p.user_id);
         return { id: p.id, nom: prof?.nom || null, prenom: prof?.prenom || null };
