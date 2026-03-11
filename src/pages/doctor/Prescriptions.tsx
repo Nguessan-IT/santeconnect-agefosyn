@@ -29,10 +29,10 @@ interface Prescription {
   patient?: { nom: string; prenom: string } | null;
 }
 
-interface Patient {
+interface PatientDisplay {
   id: string;
-  nom: string;
-  prenom: string;
+  nom: string | null;
+  prenom: string | null;
 }
 
 const emptyMedicament: Medicament = { nom: "", dosage: "", frequence: "" };

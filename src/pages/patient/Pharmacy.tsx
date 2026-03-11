@@ -17,7 +17,7 @@ interface Prescription {
   document_url: string | null;
   statut: string | null;
   created_at: string;
-  medecin: { nom: string; prenom: string } | null;
+  medecin: { nom: string | null; prenom: string | null } | null;
 }
 
 export default function PatientPharmacy() {
