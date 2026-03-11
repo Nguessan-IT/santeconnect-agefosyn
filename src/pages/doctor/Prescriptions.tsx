@@ -92,7 +92,7 @@ export default function DoctorPrescriptions() {
 
       const profileById = new Map((profiles || []).map(p => [p.id, p]));
       const patientDisplayList: PatientDisplay[] = (patientsRaw || []).map(p => {
-        const prof = profileById.get(p.user_id);
+        const prof = profileById.get(p.user_id ?? "");
         return { id: p.id, nom: prof?.nom ?? null, prenom: prof?.prenom ?? null };
       });
       setPatients(patientDisplayList);
