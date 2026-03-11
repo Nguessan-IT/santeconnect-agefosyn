@@ -286,7 +286,7 @@ export default function DoctorPrescriptions() {
                       </div>
                       <div className="min-w-0 flex-1">
                         {p.patient && (
-                          <h3 className="font-semibold text-sm truncate">{p.patient.prenom} {p.patient.nom}</h3>
+                          <h3 className="font-semibold text-sm truncate">{p.patient.prenom || ""} {p.patient.nom || ""}</h3>
                         )}
                         <p className="text-xs text-muted-foreground truncate">
                           {p.medicaments.map(m => m.nom).join(", ")}
