@@ -129,7 +129,7 @@ export default function PatientPharmacy() {
   const filtered = prescriptions.filter(p =>
     search === "" ||
     p.medicaments.some(m => m.nom.toLowerCase().includes(search.toLowerCase())) ||
-    p.medecin?.nom.toLowerCase().includes(search.toLowerCase())
+    p.medecin?.nom?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (

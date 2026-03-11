@@ -237,8 +237,8 @@ export default function DoctorPrescriptions() {
   const filtered = prescriptions.filter(p =>
     search === "" ||
     p.medicaments.some(m => m.nom.toLowerCase().includes(search.toLowerCase())) ||
-    p.patient?.nom.toLowerCase().includes(search.toLowerCase()) ||
-    p.patient?.prenom.toLowerCase().includes(search.toLowerCase())
+    p.patient?.nom?.toLowerCase().includes(search.toLowerCase()) ||
+    p.patient?.prenom?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
