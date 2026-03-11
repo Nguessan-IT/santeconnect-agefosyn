@@ -84,16 +84,16 @@ export default function DoctorPrescriptions() {
         .from("patients_santeconnect")
         .select("id, user_id");
 
-      const userIds = (patientsRaw || []).map(p => p.user_id).filter(Boolean);
+      const userIds = (patientsRaw || []).map(p => p.user_id).filter(Boolean) as string[];
       const { data: profiles } = await supabase
         .from("profiles_santeconnect")
-        .select("id, nom, prenom, user_id")
-        .in("user_id", userIds);
+        .select("id, nom, prenom")
+        .in("id", userIds);
 
-      const profileByUserId = new Map((profiles || []).map(p => [p.user_id, p]));
+      const profileById = new Map((profiles || []).map(p => [p.id, p]));
       const patientDisplayList: PatientDisplay[] = (patientsRaw || []).map(p => {
-        const prof = profileByUserId.get(p.user_id);
-        return { id: p.id, nom: prof?.nom || null, prenom: prof?.prenom || null };
+        const prof = profileById.get(p.user_id ?? "");
+        return { id: p.id, nom: prof?.nom ?? null, prenom: prof?.prenom ?? null };
       });
       setPatients(patientDisplayList);
 
@@ -237,8 +237,8 @@ export default function DoctorPrescriptions() {
   const filtered = prescriptions.filter(p =>
     search === "" ||
     p.medicaments.some(m => m.nom.toLowerCase().includes(search.toLowerCase())) ||
-    p.patient?.nom.toLowerCase().includes(search.toLowerCase()) ||
-    p.patient?.prenom.toLowerCase().includes(search.toLowerCase())
+    p.patient?.nom?.toLowerCase().includes(search.toLowerCase()) ||
+    p.patient?.prenom?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -286,7 +286,7 @@ export default function DoctorPrescriptions() {
                       </div>
                       <div className="min-w-0 flex-1">
                         {p.patient && (
-                          <h3 className="font-semibold text-sm truncate">{p.patient.prenom} {p.patient.nom}</h3>
+                          <h3 className="font-semibold text-sm truncate">{p.patient.prenom || ""} {p.patient.nom || ""}</h3>
                         )}
                         <p className="text-xs text-muted-foreground truncate">
                           {p.medicaments.map(m => m.nom).join(", ")}

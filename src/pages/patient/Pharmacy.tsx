@@ -129,7 +129,7 @@ export default function PatientPharmacy() {
   const filtered = prescriptions.filter(p =>
     search === "" ||
     p.medicaments.some(m => m.nom.toLowerCase().includes(search.toLowerCase())) ||
-    p.medecin?.nom.toLowerCase().includes(search.toLowerCase())
+    p.medecin?.nom?.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
@@ -228,7 +228,7 @@ export default function PatientPharmacy() {
                     {new Date(selectedPrescription.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
                   </p>
                   {selectedPrescription.medecin && (
-                    <p className="text-sm font-medium">Dr. {selectedPrescription.medecin.prenom} {selectedPrescription.medecin.nom}</p>
+                    <p className="text-sm font-medium">Dr. {selectedPrescription.medecin.prenom || ""} {selectedPrescription.medecin.nom || ""}</p>
                   )}
                 </div>
                 <span className={`text-xs px-2 py-1 rounded-full font-medium ${getStatusColor(selectedPrescription.statut)}`}>
