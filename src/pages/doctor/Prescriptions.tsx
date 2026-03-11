@@ -26,7 +26,7 @@ interface Prescription {
   duree_traitement: string | null;
   statut: string | null;
   created_at: string;
-  patient?: { nom: string; prenom: string } | null;
+  patient?: { nom: string | null; prenom: string | null } | null;
 }
 
 interface PatientDisplay {
