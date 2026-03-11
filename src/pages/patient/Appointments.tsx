@@ -135,6 +135,7 @@ export default function PatientAppointments() {
           </div>
         )}
       </main>
+      <MobileBottomNav role="patient" />
     </div>
   );
 }

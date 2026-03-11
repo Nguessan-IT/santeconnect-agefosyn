@@ -48,6 +48,7 @@ export default function PatientMedicalRecord() {
           </TabsContent>
         </Tabs>
       </main>
+      <MobileBottomNav role="patient" />
     </div>
   );
 }

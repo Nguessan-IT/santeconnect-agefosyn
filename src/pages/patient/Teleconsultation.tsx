@@ -110,6 +110,7 @@ export default function PatientTeleconsultation() {
           </Card>
         )}
       </main>
+      <MobileBottomNav role="patient" />
     </div>
   );
 }

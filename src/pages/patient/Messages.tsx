@@ -148,6 +148,7 @@ export default function PatientMessages() {
           </div>
         )}
       </main>
+      <MobileBottomNav role="patient" />
     </div>
   );
 }
