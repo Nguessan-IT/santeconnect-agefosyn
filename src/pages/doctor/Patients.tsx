@@ -8,6 +8,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import MobileBottomNav from "@/components/MobileBottomNav";
 import { toast } from "sonner";
 
 export default function DoctorPatients() {
