@@ -79,26 +79,29 @@ export default function DoctorPrescriptions() {
 
       if (error) throw error;
 
-      // Load patients for the form
-      const { data: patientsData } = await supabase
+      // Load patients via profiles_santeconnect for display names
+      const { data: patientsRaw } = await supabase
         .from("patients_santeconnect")
-        .select("id, nom, prenom")
-        .order("nom");
+        .select("id, user_id");
 
-      setPatients(patientsData || []);
+      const userIds = (patientsRaw || []).map(p => p.user_id).filter(Boolean);
+      const { data: profiles } = await supabase
+        .from("profiles_santeconnect")
+        .select("id, nom, prenom, user_id")
+        .in("user_id", userIds);
 
-      // Get patient names for prescriptions
-      const patientIds = [...new Set((prescData || []).map(p => p.patient_id))];
-      const { data: patientNames } = await supabase
-        .from("patients_santeconnect")
-        .select("id, nom, prenom")
-        .in("id", patientIds);
+      const profileByUserId = new Map((profiles || []).map(p => [p.user_id, p]));
+      const patientDisplayList: PatientDisplay[] = (patientsRaw || []).map(p => {
+        const prof = profileByUserId.get(p.user_id);
+        return { id: p.id, nom: prof?.nom || null, prenom: prof?.prenom || null };
+      });
+      setPatients(patientDisplayList);
 
-      const patientMap = new Map((patientNames || []).map(p => [p.id, p]));
+      const patientMap = new Map(patientDisplayList.map(p => [p.id, p]));
 
       setPrescriptions((prescData || []).map(p => ({
         ...p,
-        medicaments: Array.isArray(p.medicaments) ? p.medicaments as Medicament[] : [],
+        medicaments: Array.isArray(p.medicaments) ? p.medicaments as unknown as Medicament[] : [],
         patient: patientMap.get(p.patient_id) || null,
       })));
     } catch (err) {

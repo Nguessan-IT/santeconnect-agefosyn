@@ -180,7 +180,7 @@ export default function PatientPharmacy() {
                           {p.medicaments.map(m => m.nom).join(", ") || "Ordonnance"}
                         </h3>
                         {p.medecin && (
-                          <p className="text-xs text-muted-foreground">Dr. {p.medecin.prenom} {p.medecin.nom}</p>
+                          <p className="text-xs text-muted-foreground">Dr. {p.medecin.prenom || ""} {p.medecin.nom || ""}</p>
                         )}
                         <div className="flex items-center gap-2 mt-1 flex-wrap">
                           <span className="text-[10px] text-muted-foreground flex items-center gap-1">
