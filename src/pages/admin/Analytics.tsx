@@ -3,6 +3,7 @@ import { ArrowLeft, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 export default function AdminAnalytics() {
   return (
@@ -23,6 +24,7 @@ export default function AdminAnalytics() {
           </CardContent>
         </Card>
       </main>
+      <MobileBottomNav role="admin" />
     </div>
   );
 }
