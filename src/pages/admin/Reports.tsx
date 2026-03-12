@@ -24,6 +24,7 @@ export default function AdminReports() {
           </CardContent>
         </Card>
       </main>
+      <MobileBottomNav role="admin" />
     </div>
   );
 }

@@ -133,6 +133,7 @@ export default function AdminHospitals() {
           </div>
         )}
       </main>
+      <MobileBottomNav role="admin" />
     </div>
   );
 }
