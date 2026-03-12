@@ -3,6 +3,7 @@ import { ArrowLeft, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import AnimatedBackground from "@/components/AnimatedBackground";
+import MobileBottomNav from "@/components/MobileBottomNav";
 
 export default function AdminReports() {
   return (
